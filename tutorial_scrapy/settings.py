@@ -13,7 +13,10 @@ BOT_NAME = 'tutorial_scrapy'
 
 SPIDER_MODULES = ['tutorial_scrapy.spiders']
 NEWSPIDER_MODULE = 'tutorial_scrapy.spiders'
+# DEFAULT_ITEM_CLASS = 'tutorial_scrapy.items.TutorialScrapyItem'
 
+# FEED_URI = 'file:///export.json'
+# FEED_FORMAT = 'json'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'tutorial_scrapy (+http://www.yourdomain.com)'
@@ -52,9 +55,10 @@ NEWSPIDER_MODULE = 'tutorial_scrapy.spiders'
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'tutorial_scrapy.middlewares.MyCustomDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+   # 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+   'tutorial_scrapy.middlewares.RandomUserAgentMiddleware': 543,
+}
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
@@ -64,9 +68,9 @@ NEWSPIDER_MODULE = 'tutorial_scrapy.spiders'
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'tutorial_scrapy.pipelines.SomePipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'tutorial_scrapy.pipelines.JsonWriterPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
